@@ -213,4 +213,57 @@ public class Array2 {
 		return newArray;
 	}
 
+	/*
+	 * Given an array of ints, return true if every element is a 1 or a 4.
+	 * 
+	 * only14([1, 4, 1, 4]) → true only14([1, 4, 2, 4]) → false only14([1, 1]) →
+	 * true
+	 */
+
+	public boolean only14(int[] nums) {
+		for (int number : nums) {
+			if (number != 1 && number != 4) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/*
+	 * Given a number n, create and return a new string array of length n,
+	 * containing the strings "0", "1" "2" .. through n-1. N may be 0, in which
+	 * case just return a length 0 array. Note: String.valueOf(xxx) will make
+	 * the String form of most types. The syntax to make a new string array is:
+	 * new String[desired_length]
+	 */
+
+	public String[] fizzArray2(int n) {
+		if (n == 0)
+			return new String[0]; // if n == 0 return empty string
+		String fizzArray[] = new String[n];
+		for (int i = 0; i < n; i++) {
+			fizzArray[i] = String.valueOf(i); // otherwise iterate through
+												// through the loop n times and
+												// add n to position n in the
+												// array
+		}
+		return fizzArray;
+	}
+
+	/*
+	 * Given an array of ints, return true if it contains no 1's or it contains
+	 * no 4's.
+	 * 
+	 * no14([1, 2, 3]) → true no14([1, 2, 3, 4]) → false no14([2, 3, 4]) → true
+	 */
+
+	public boolean no14(int[] nums) {
+		boolean has1 = false, has4 = false;
+		for (int number : nums) {
+			if (number == 1) has1 = true; 
+			if (number == 4) has4 = true;
+		}
+		return (!has1 || !has4);
+	}
+
 }
