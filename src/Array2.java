@@ -259,11 +259,144 @@ public class Array2 {
 
 	public boolean no14(int[] nums) {
 		boolean has1 = false, has4 = false;
-		for (int number : nums) {
-			if (number == 1) has1 = true; 
-			if (number == 4) has4 = true;
+		for (int i = 0; i < nums.length; i++) {
+			if (nums[i] == 1)
+				has1 = true;
+			if (nums[i] == 4)
+				has4 = true;
 		}
-		return (!has1 || !has4);
+		return ((!has1) || (!has4));
+	}
+
+	/*
+	 * Given an array of ints, return true if the array contains a 2 next to a 2
+	 * or a 4 next to a 4, but not both.
+	 * 
+	 * either24([1, 2, 2]) → true either24([4, 4, 1]) → true either24([4, 4, 1,
+	 * 2, 2]) → false
+	 */
+	public boolean either24(int[] nums) {
+		boolean two2s = false, two4s = false;
+		for (int i = 0; i < nums.length - 1; i++) {
+			if (nums[i] == 2 && nums[i + 1] == 2)
+				two2s = true;
+			if (nums[i] == 4 && nums[i + 1] == 4)
+				two4s = true;
+		}
+		return (two2s != two4s);
+	}
+
+	/*
+	 * Given arrays nums1 and nums2 of the same length, for every element in
+	 * nums1, consider the corresponding element in nums2 (at the same index).
+	 * Return the count of the number of times that the two elements differ by 2
+	 * or less, but are not equal.
+	 * 
+	 * matchUp([1, 2, 3], [2, 3, 10]) → 2 matchUp([1, 2, 3], [2, 3, 5]) → 3
+	 * matchUp([1, 2, 3], [2, 3, 3]) → 2
+	 */
+
+	public int matchUp(int[] nums1, int[] nums2) {
+		int lessThanTwo = 0;
+		for (int i = 0; i < nums1.length; i++) {
+			if (nums1[i] != nums2[i] && Math.abs(nums1[i] - nums2[i]) <= 2)
+				lessThanTwo++;
+		}
+		return lessThanTwo;
+	}
+
+	/*
+	 * Given an array of ints, return true if the array contains two 7's next to
+	 * each other, or there are two 7's separated by one element, such as with
+	 * {7, 1, 7}.
+	 * 
+	 * has77([1, 7, 7]) → true has77([1, 7, 1, 7]) → true has77([1, 7, 1, 1, 7])
+	 * → false
+	 */
+
+	public boolean has77(int[] nums) {
+		for (int i = 1; i < nums.length - 1; i++) {
+			if (nums[i] == 7 && nums[i - 1] == 7)
+				return true;
+			if (nums[i] == 7 && nums[i + 1] == 7)
+				return true;
+			if (nums[i - 1] == 7 && nums[i + 1] == 7)
+				return true;
+		}
+		return false;
+	}
+
+	/*
+	 * Given an array of ints, return true if there is a 1 in the array with a 2
+	 * somewhere later in the array.
+	 * 
+	 * has12([1, 3, 2]) → true has12([3, 1, 2]) → true has12([3, 1, 4, 5, 2]) →
+	 * true
+	 */
+
+	public boolean has12(int[] nums) {
+		boolean previous1 = false;
+		for (int i = 0; i < nums.length; i++) {
+			if (nums[i] == 1) {
+				previous1 = true;
+			}
+			if (nums[i] == 2 && previous1)
+				return true;
+		}
+		return false;
+	}
+
+	/*
+	 * Given an array of ints, return true if the array contains either 3 even
+	 * or 3 odd values all next to each other.
+	 * 
+	 * modThree([2, 1, 3, 5]) → true modThree([2, 1, 2, 5]) → false modThree([2,
+	 * 4, 2, 5]) → true
+	 */
+	public boolean modThree(int[] nums) {
+		int evens = 0, odds = 0;
+		for (int i = 0; i < nums.length; i++) {
+			if (nums[i] % 2 == 0) {
+				evens++;
+			} else {
+				evens = 0;
+			}
+			if (evens == 3 && odds == 0)
+				return true;
+			if (nums[i] % 2 == 1) {
+				odds++;
+			} else {
+				odds = 0;
+			}
+			if (odds == 3 && evens == 0)
+				return true;
+		}
+		return false;
+	}
+
+	/*
+	 * Given an array of ints, return true if the value 3 appears in the array
+	 * exactly 3 times, and no 3's are next to each other.
+	 * 
+	 * haveThree([3, 1, 3, 1, 3]) → true haveThree([3, 1, 3, 3]) → false
+	 * haveThree([3, 4, 3, 3, 4]) → false
+	 */
+
+	public boolean haveThree(int[] nums) {
+		int threeCount = 0; boolean prevWasThree = false;
+		for(int i = 0; i < nums.length; i++) {
+			if(nums[i] == 3) {	// current value is three
+				if(prevWasThree) {
+					return false;	// last value was 3 and current is 3, return false
+				} else {
+					threeCount++;
+					prevWasThree = true;
+				}				
+			} else {
+				prevWasThree = false;	// reset the flag since the last value wasn't 3
+			}
+		}
+		return threeCount == 3;
 	}
 
 }
