@@ -383,20 +383,46 @@ public class Array2 {
 	 */
 
 	public boolean haveThree(int[] nums) {
-		int threeCount = 0; boolean prevWasThree = false;
-		for(int i = 0; i < nums.length; i++) {
-			if(nums[i] == 3) {	// current value is three
-				if(prevWasThree) {
-					return false;	// last value was 3 and current is 3, return false
+		int threeCount = 0;
+		boolean prevWasThree = false;
+		for (int i = 0; i < nums.length; i++) {
+			if (nums[i] == 3) { // current value is three
+				if (prevWasThree) {
+					return false; // last value was 3 and current is 3, return
+									// false
 				} else {
 					threeCount++;
 					prevWasThree = true;
-				}				
+				}
 			} else {
-				prevWasThree = false;	// reset the flag since the last value wasn't 3
+				prevWasThree = false; // reset the flag since the last value
+										// wasn't 3
 			}
 		}
 		return threeCount == 3;
 	}
 
+	/*
+	 * Given an array of ints, return true if every 2 that appears in the array
+	 * is next to another 2.
+	 * 
+	 * twoTwo([4, 2, 2, 3]) → true twoTwo([2, 2, 4]) → true twoTwo([2, 2, 4, 2])
+	 * → false
+	 */
+
+	public boolean twoTwo(int[] nums) {
+		for (int i = 0; i < nums.length; i++) {
+			if(nums[i] != 2) {
+				continue;
+			}
+			if(i >= 1 && nums[i-1] == 2) { // previous number was a 2
+				continue;
+			}
+			if(i < (nums.length-1) && nums[i+1] == 2) {	// not out of bounds and next number is a 2
+				continue;
+			}
+			return false;
+		}
+		return true;
+	}
 }
